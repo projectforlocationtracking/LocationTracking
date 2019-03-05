@@ -17,10 +17,10 @@ import android.view.animation.AnimationUtils
 import android.view.animation.Animation
 import android.widget.ImageView
 import com.example.sayan.locationtracking.R
-<<<<<<< HEAD
+
 import com.example.sayan.locationtracking.SavedSharedPreferences
-=======
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
+
+
 import com.smarteist.autoimageslider.SliderLayout
 import com.smarteist.autoimageslider.SliderView
 
@@ -40,7 +40,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
         super.onCreate(savedInstanceState)
         setContentView(com.example.sayan.locationtracking.R.layout.activity_splash_screen)
 
-<<<<<<< HEAD
+
         val len= SavedSharedPreferences.getUserName(this).length
 
         if(SavedSharedPreferences.getUserName(this).length == 0)
@@ -49,8 +49,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
              startActivity(i)
         }
 
-=======
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
         signUpBtn = findViewById(R.id.signUpBtn)
         logInBtn=findViewById(R.id.logInBtn)
         sliderLayout = findViewById(R.id.imgView_logo)

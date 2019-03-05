@@ -25,10 +25,9 @@ import android.widget.Toast;
 import com.example.sayan.locationtracking.Activity.MapNewActivity;
 import com.example.sayan.locationtracking.Authentication.EmailAuthenticate;
 import com.example.sayan.locationtracking.R;
-<<<<<<< HEAD
+
 import com.example.sayan.locationtracking.SavedSharedPreferences;
-=======
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
+
 import com.example.sayan.locationtracking.ToastForInputValidation.CustomToast;
 import com.example.sayan.locationtracking.UtilityStringClass.Utils;
 import com.google.firebase.auth.FirebaseAuth;
@@ -181,10 +180,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener
         String getEmailId = emailid.getText().toString();
         String getPassword = password.getText().toString();
 
-<<<<<<< HEAD
+
         SavedSharedPreferences.setUserName(getActivity(),getEmailId);
-=======
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
+
         // Check patter for email id
         Pattern p = Pattern.compile(Utils.regEx);
 
