@@ -15,14 +15,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.sayan.locationtracking.Activity.MapNewActivity;
 import com.example.sayan.locationtracking.Authentication.EmailAuthenticate;
 import com.example.sayan.locationtracking.R;
-<<<<<<< HEAD
 import com.example.sayan.locationtracking.SavedSharedPreferences;
-=======
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
 import com.example.sayan.locationtracking.ToastForInputValidation.CustomToast;
 import com.example.sayan.locationtracking.UtilityStringClass.Utils;
 //import com.google.android.gms.plus.Plus;
@@ -48,24 +44,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
 
      String mFullName, mEmailId, mLocation, mPassword, mMobileNumber, mConfirmpassword;
 
-<<<<<<< HEAD
-    public SignUpFragment()
-    {
-=======
+
     public SignUpFragment() {
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-<<<<<<< HEAD
-                             Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-=======
-                             Bundle savedInstanceState) {
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
-
         view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         initViews();
         setListeners();
@@ -73,12 +59,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
     }
 
     // Initialize all views
-<<<<<<< HEAD
+
+
     private void initViews()
     {
-=======
-    private void initViews() {
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
+
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
@@ -114,7 +99,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
 
     // Set Listeners
 
-    private void setListeners() {
+    private void setListeners()
+    {
         signUpButton.setOnClickListener(this);
         login.setOnClickListener(this);
     }
@@ -129,20 +115,12 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId())
         {
-<<<<<<< HEAD
-=======
 
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
             case R.id.signUpBtn:
 
                 // Call checkValidation method
                 checkValidation();
                 // Now call authenticate() of Authenticate interface implemented in EmailAuthentication class
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 updateUI(currentUser);
                 break;
@@ -174,11 +152,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
         mPassword = password.getText().toString();
         mConfirmpassword = confirmPassword.getText().toString();
 
-<<<<<<< HEAD
         SavedSharedPreferences.setUserName(getActivity(),mEmailId);
-
-=======
->>>>>>> f50cf57aa3d711d1f2340ec017fdd1f1780499a0
         // Pattern match for email id
         Pattern p = Pattern.compile(Utils.regEx);
         Matcher m = p.matcher(mEmailId);
