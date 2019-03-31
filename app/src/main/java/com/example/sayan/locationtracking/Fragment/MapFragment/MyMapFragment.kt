@@ -81,7 +81,6 @@ class MyMapFragment : Fragment(),OnMapReadyCallback
         {
             val mapFragment: SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
             mapFragment.getMapAsync(this)
-
         }
 
 
