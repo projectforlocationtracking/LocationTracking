@@ -40,6 +40,7 @@ class EmailAuthenticate(val context: Activity) : Authenticate
 
     //    val currentUser = auth.currentUser
 
+        Log.e("TAG2","In create new user method");
 
             auth.createUserWithEmailAndPassword(email, password)
 
@@ -56,12 +57,18 @@ class EmailAuthenticate(val context: Activity) : Authenticate
                             Toast.makeText(context,"Authentication successful",Toast.LENGTH_LONG).show()
                             Log.e("TAG1","Authentication Successful")
 
+                            val user = auth.currentUser
+                            if (user != null) {
+                                updateUI(user)
+                            }
+
                         }
                         else
                         {
                             val authException:FirebaseAuthException = task.exception as FirebaseAuthException
-                            Toast.makeText(context,"User Exists",Toast.LENGTH_LONG).show()
-                            //Log.e("TAG2","Authentication Failed for :" + authException)
+                            Toast.makeText(context,authException.message,Toast.LENGTH_LONG).show()
+                            Log.e("TAG2","Authentication Failed for :" + authException)
+
                         }
                     }
     }

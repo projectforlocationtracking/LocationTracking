@@ -42,7 +42,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
 
     private FirebaseAuth auth;
 
-     String mFullName, mEmailId, mLocation, mPassword, mMobileNumber, mConfirmpassword;
+     String mFullName, mEmailId, mPassword, mMobileNumber, mConfirmpassword;
 
     public SignUpFragment() {
 
@@ -63,7 +63,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
-        location = (EditText) view.findViewById(R.id.location);
         password = (EditText) view.findViewById(R.id.password);
         confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
@@ -115,11 +114,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
 
                 // Call checkValidation method
                 checkValidation();
+
                 // Now call authenticate() of Authenticate interface implemented in EmailAuthentication class
-
-
-                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                updateUI(currentUser);
+                //FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                //updateUI(currentUser);
                 break;
 
             case R.id.already_user:
@@ -145,7 +143,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
         mFullName = fullName.getText().toString();
         mEmailId = emailId.getText().toString();
         mMobileNumber = mobileNumber.getText().toString();
-        mLocation = location.getText().toString();
+//        mLocation = location.getText().toString();
         mPassword = password.getText().toString();
         mConfirmpassword = confirmPassword.getText().toString();
 
@@ -157,7 +155,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
         if (mFullName.equals("") || mFullName.length() == 0
                 || mEmailId.equals("") || mEmailId.length() == 0
                 || mMobileNumber.equals("") || mMobileNumber.length() == 0
-                || mLocation.equals("") || mLocation.length() == 0
                 || mPassword.equals("") || mPassword.length() == 0
                 || mConfirmpassword.equals("")
                 || mConfirmpassword.length() == 0)
