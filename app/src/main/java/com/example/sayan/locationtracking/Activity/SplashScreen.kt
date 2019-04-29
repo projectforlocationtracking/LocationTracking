@@ -16,12 +16,18 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import com.example.sayan.locationtracking.R
+import com.example.sayan.locationtracking.ConncetToNet
 import com.google.firebase.auth.FirebaseAuth
 import com.smarteist.autoimageslider.SliderLayout
 import com.smarteist.autoimageslider.SliderView
 
 import java.util.*
+import android.content.DialogInterface
+
+import android.content.Context
+import android.support.v7.app.AlertDialog
+import com.example.sayan.locationtracking.R
+
 
 class SplashScreen : AppCompatActivity(), View.OnClickListener
 {
@@ -29,6 +35,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
     private lateinit var signUpBtn: Button
     private lateinit var logInBtn:Button
     private lateinit var sliderLayout: SliderLayout
+    private lateinit var connect:ConncetToNet
 
     companion object
     {
@@ -39,8 +46,9 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.sayan.locationtracking.R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_splash_screen)
 
+        connect = ConncetToNet(this)
 
         var user = FirebaseAuth.getInstance().currentUser
 
@@ -51,6 +59,8 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
             // No user is signed in.
             Log.v(TAG2,"User not Logged in")
         }
+
+
 
         signUpBtn = findViewById(R.id.signUpBtn)
         logInBtn=findViewById(R.id.logInBtn)
@@ -64,6 +74,14 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
 
         signUpBtn.setOnClickListener(this)
         logInBtn.setOnClickListener(this)
+
+        if(!connect.isConnected())
+        {
+            showAlertDialog(this);
+
+        }
+
+
 
         reqPermission()
 
@@ -110,7 +128,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
         background.start()
 
 **/
-
         setSliderViews()
     }
 
@@ -187,10 +204,57 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
     }
 
 
+    fun showAlertDialog(c: Context) {
+
+        val builder = AlertDialog.Builder(c)
+        builder.setTitle("No Internet Connection")
+        builder.setMessage("You need to have Mobile Data or wifi to access this. Press ok to Exit")
+
+        builder.setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which -> })
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(View.OnClickListener {
+            if (connect.isConnected()) {
+                //dialog.dismiss()
+                backGroundTask(dialog)
+            } else
+                finish()
+        })
+
+    }
+
+
+    fun backGroundTask(dialog: AlertDialog) {
+        val background = object : Thread() {
+            override fun run() {
+                try {
+                    // Thread will sleep for 5 seconds
+                    Thread.sleep((2 * 1000).toLong())
+
+                    // After 5 seconds redirect to another intent
+
+                    dialog.dismiss()
+                    //Remove activity
+                    //finish()
+                } catch (e: Exception) {
+                }
+
+            }
+
+        }
+        // start thread
+        background.start()
+    }
+
     override fun onStop() {
         super.onStop()
 
         stopService(Intent(baseContext, GPSTracker::class.java))
 
     }
+
+
+
 }
