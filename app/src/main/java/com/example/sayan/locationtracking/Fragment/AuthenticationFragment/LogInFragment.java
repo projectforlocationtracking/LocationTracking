@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.sayan.locationtracking.Authentication.EmailAuthenticate;
 import com.example.sayan.locationtracking.R;
+import com.example.sayan.locationtracking.SharedPref;
 import com.example.sayan.locationtracking.ToastForInputValidation.CustomToast;
 import com.example.sayan.locationtracking.UtilityStringClass.Utils;
 
@@ -198,6 +199,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener
         else {
 
           //  loginButton.setEnabled(true);
+
+            SharedPref.saveSettings(getActivity(),"MyPref","true");
+            SharedPref.SharedPrefSave(getActivity(),getEmailId,getPassword);
             new EmailAuthenticate(getActivity()).signInUser(getEmailId, getPassword);
 
         }

@@ -25,8 +25,10 @@ import java.util.*
 import android.content.DialogInterface
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.support.v7.app.AlertDialog
 import com.example.sayan.locationtracking.R
+import com.example.sayan.locationtracking.SharedPref
 
 
 class SplashScreen : AppCompatActivity(), View.OnClickListener
@@ -41,6 +43,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
     {
         val TAG1 = "TAG1"
         val TAG2 = "TAG2"
+        //val MY_PREF = "My Pref"
     }
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -50,17 +53,21 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
 
         connect = ConncetToNet(this)
 
+        //sharedPref = getSharedPreferences(MY_PREF,0)
+
+
         var user = FirebaseAuth.getInstance().currentUser
 
-        if (user!=null) {
+        if (user!=null)
+        {
 
            Log.v(TAG1,"User logged in")
-        } else {
+        }
+        else
+        {
             // No user is signed in.
             Log.v(TAG2,"User not Logged in")
         }
-
-
 
         signUpBtn = findViewById(R.id.signUpBtn)
         logInBtn=findViewById(R.id.logInBtn)
@@ -86,6 +93,8 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
         reqPermission()
 
         startService(Intent(baseContext, GPSTracker::class.java))
+
+        CheckUser()
 
         val hide =
                 AnimationUtils.loadAnimation(this, R.anim.bottom_to_top)
@@ -129,6 +138,27 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
 
 **/
         setSliderViews()
+    }
+
+
+    fun CheckUser()
+    {
+        /*val check:Boolean = SharedPref.readSharedSetting(this,"MyPref","true").toBoolean()
+
+        if(check)
+        {
+            val intent = Intent(this,MapNewActivity::class.java)
+            startActivity(intent)
+            //finish()
+        }*/
+
+        val value = getSharedPreferences("MyPref",Context.MODE_PRIVATE).getBoolean("UserExists",false)
+        if(value)
+        {
+            val intent = Intent(this,MapNewActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 
