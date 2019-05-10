@@ -1,59 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/black"
-tools:context=".Activity.SplashScreen">
 
-<RelativeLayout
+<ScrollView
 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".Activity.SplashScreen">
 
-    <com.smarteist.autoimageslider.SliderLayout
-        android:id="@+id/imgView_logo"
+    <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_alignParentTop="true" />
-
-    <Button
-        android:background="@color/background_color"
-        android:id="@+id/signUpBtn"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/imgView_logo"
-        android:layout_marginLeft="@dimen/dimen_64x"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="@dimen/dimen_64x"
-        android:paddingLeft="@dimen/dimen_32x"
-        android:paddingRight="@dimen/dimen_32x"
-        android:text="Sign Up"
-        android:textAllCaps="false"
-        android:textColor="#ffff"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
 
 
-    <Button
-        android:id="@+id/logInBtn"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/signUpBtn"
-        android:layout_marginLeft="@dimen/dimen_64x"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="@dimen/dimen_64x"
-        android:background="@color/button_selectorcolor"
-        android:paddingLeft="@dimen/dimen_32x"
-        android:paddingRight="@dimen/dimen_32x"
-        android:text="LogIn"
-        android:textAllCaps="false"
-        android:textColor="#ffff"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logInBtn"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="OR"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <com.google.android.gms.common.SignInButton
+
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logInBtn"
+            android:layout_marginLeft="@dimen/dimen_64x"
+            android:layout_marginTop="41dp"
+            android:layout_marginRight="@dimen/dimen_64x"
+            android:paddingLeft="@dimen/dimen_64x"
+            android:paddingRight="@dimen/dimen_64x" />
 
 
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/imgView_logo"
+            android:layout_marginLeft="@dimen/dimen_64x"
+            android:layout_marginRight="@dimen/dimen_64x"
+            android:background="@color/background_color"
+            android:paddingLeft="@dimen/dimen_32x"
+            android:paddingRight="@dimen/dimen_32x"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textColor="#ffff"
+            android:textStyle="bold" />
 
-</RelativeLayout>
+
+        <Button
+            android:id="@+id/logInBtn"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/signUpBtn"
+            android:layout_marginLeft="@dimen/dimen_64x"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/dimen_64x"
+            android:background="@color/button_selectorcolor"
+            android:paddingLeft="@dimen/dimen_32x"
+            android:paddingRight="@dimen/dimen_32x"
+            android:text="LogIn"
+            android:textAllCaps="false"
+            android:textColor="#ffff"
+            android:textStyle="bold" />
+
+        <com.smarteist.autoimageslider.SliderLayout
+
+            android:id="@+id/imgView_logo"
+            android:layout_width="match_parent"
+            android:layout_height="458dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="49dp" />
+
+
+    </RelativeLayout>
 
 
 </ScrollView>

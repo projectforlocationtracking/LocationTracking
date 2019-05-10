@@ -27,22 +27,36 @@ import android.content.DialogInterface
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.app.AlertDialog
+import android.widget.TextView
 import com.example.sayan.locationtracking.R
 import com.example.sayan.locationtracking.SharedPref
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 
 class SplashScreen : AppCompatActivity(), View.OnClickListener
 {
-
+    private lateinit var googleSignIn:SignInButton
     private lateinit var signUpBtn: Button
     private lateinit var logInBtn:Button
     private lateinit var sliderLayout: SliderLayout
     private lateinit var connect:ConncetToNet
+    private lateinit var gso:GoogleSignInOptions
+    private lateinit var client:GoogleSignInClient
+    private lateinit var textView:TextView
+
 
     companion object
     {
+        val TAG = "Tag For Google Sign In"
         val TAG1 = "TAG1"
         val TAG2 = "TAG2"
+        val RC_SIGN_IN = 1
         //val MY_PREF = "My Pref"
     }
 
@@ -54,7 +68,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
         connect = ConncetToNet(this)
 
         //sharedPref = getSharedPreferences(MY_PREF,0)
-
 
         var user = FirebaseAuth.getInstance().currentUser
 
@@ -69,18 +82,30 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
             Log.v(TAG2,"User not Logged in")
         }
 
+        googleSignIn = findViewById(R.id.sign_in_button)
         signUpBtn = findViewById(R.id.signUpBtn)
         logInBtn=findViewById(R.id.logInBtn)
         sliderLayout = findViewById(R.id.imgView_logo)
+        textView = findViewById(R.id.textView)
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.FILL)
 
         sliderLayout.scrollTimeInSec = 1
 
         signUpBtn.setVisibility(INVISIBLE)
         logInBtn.setVisibility(INVISIBLE)
+        googleSignIn.visibility = INVISIBLE
+        textView.visibility = INVISIBLE
 
         signUpBtn.setOnClickListener(this)
         logInBtn.setOnClickListener(this)
+
+        googleSignIn.setOnClickListener {
+
+            val intent = client.signInIntent
+            startActivityForResult(intent,RC_SIGN_IN)
+        }
+
+
 
         if(!connect.isConnected())
         {
@@ -89,6 +114,12 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
         }
 
 
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
+
+
+        client = GoogleSignIn.getClient(this, gso);
 
         reqPermission()
 
@@ -106,9 +137,13 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
 
                     signUpBtn.setVisibility(VISIBLE)
                     logInBtn.setVisibility(VISIBLE)
+                    textView.visibility= VISIBLE
+                    googleSignIn.setVisibility(VISIBLE)
 
                     signUpBtn.startAnimation(hide)
                     logInBtn.startAnimation(hide)
+                    googleSignIn.startAnimation(hide)
+                    textView.startAnimation(hide)
 
                 }
             }
@@ -138,6 +173,19 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
 
 **/
         setSliderViews()
+    }
+
+    override fun onStart()
+    {
+        super.onStart()
+        val account:GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
+
+        if(account!=null)
+        {
+            val intent = Intent(this,MapNewActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 
@@ -230,6 +278,11 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
             intent.putExtra("EXTRA",getString(com.example.sayan.locationtracking.R.string.login))
             startActivity(intent)
         }
+       /* else if(p0.id == R.id.sign_in_button )
+        {
+            val intent = client.signInIntent
+            startActivityForResult(intent,RC_SIGN_IN)
+        }*/
 
     }
 
@@ -253,6 +306,29 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
                 finish()
         })
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.v("request code returned", requestCode.toString())
+
+        if(requestCode == RC_SIGN_IN)
+        {
+            val completedTask = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try
+            {
+                val account = completedTask.getResult(ApiException::class.java)
+                startActivity(Intent(this,MapNewActivity::class.java))
+                finish()
+
+            }
+            catch (e:ApiException)
+            {
+                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            }
+        }
     }
 
 
@@ -284,7 +360,4 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener
         stopService(Intent(baseContext, GPSTracker::class.java))
 
     }
-
-
-
 }
