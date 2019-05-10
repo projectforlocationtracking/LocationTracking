@@ -2,19 +2,26 @@
 
   It is an app where I have used these features-----
   
-  i)  Firebase Authentication for Login, SignIn and Forget password
+ i)   Firebase Authentication for Login, SignIn and Forget password 
   
- ii)  Goole Map Api for tracking the location
+ ii)  Google Sign in for Login
+  
+ iii)  Goole Map Api for tracking the location
  
-iii)  Content Provider
+ iv)   Content Provider
 
- iv)  Firebase Storage 
+ v)    Firebase Storage 
  
- v)   Firebase Cloud Messaging
+ vi)   Firebase Cloud Messaging
  
  ### Firebase Authentication---
  
     Here I have used Firebase Authentication for sign in and log in via gmail id and password. 
+    
+ ### Google Sign In---
+ 
+     Here I have used Google sign in feature for login.
+ 
  
  ### Google Map Api---
  
